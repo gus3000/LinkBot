@@ -20,7 +20,9 @@ social_equivalents = {
 }
 
 re_social_domains = "|".join(social_equivalents)
-re_pattern = r"https?://(www\.)?(" + re_social_domains + r")\.com/[^ ,]+"
+re_pattern = (
+    r"(https?://(?:www\.)?(?:" + re_social_domains + r")\.com/[^ ,?]+)(\?[^ ,]+)?"
+)
 
 
 def contains_social_url(content: str) -> str:
@@ -31,6 +33,8 @@ def contains_social_url(content: str) -> str:
 
 
 def get_equivalent_url(url: str) -> str:
+    match = re.search(re_pattern, url)
+    url = match.group(1)
     for old, new in social_equivalents.items():
         url = url.replace(old, new)
     return url
@@ -52,7 +56,7 @@ async def on_message(message):
         await message.channel.send(replacement)
 
 
-# for url in ['toto', 'https://www.instagram.com/p/DX6LBcziCDl/']:
+# for url in ['toto', 'https://www.instagram.com/p/DX6LBcziCDl/', 'https://www.instagram.com/p/DX6LBcziCDl/blabla?tracking=all']:
 #    if contains_social_url(url):
 #        print(url, get_equivalent_url(url))
 
