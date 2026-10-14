@@ -17,6 +17,7 @@ social_equivalents = {
     "facebook": "facebed",
     "twitter": "fivvx",
     "tiktok": "tnktok",
+    "reddit": "vxreddit",
 }
 
 re_social_domains = "|".join(social_equivalents)
