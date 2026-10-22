@@ -13,7 +13,7 @@ intents.message_content = True
 client = discord.Client(intents=intents)
 
 social_equivalents = {
-    "instagram": "vxinstagram",
+    "instagram": "oginstagram",
     "facebook": "facebed",
     "twitter": "fivvx",
     "tiktok": "tnktok",
